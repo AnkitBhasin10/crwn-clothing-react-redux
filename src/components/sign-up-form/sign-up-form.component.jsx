@@ -1,50 +1,52 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   createUserAuthWithUserEmailAndPassword,
   createUserDocumentFromAuth,
-} from '../../utils/firebase.utils'
-import CustomButton from '../custom-button/custom.component'
-import FormInput from '../form-input/form-input.component'
-import './sign-up-form.styles.scss'
+} from "../../utils/firebase.utils";
+import CustomButton from "../custom-button/custom.component";
+import FormInput from "../form-input/form-input.component";
+import "./sign-up-form.styles.scss";
 
 const defaultDisplayFields = {
-  displayName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-}
+  displayName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const SignUpForm = () => {
-  const [displayFields, setDisplayFields] = useState(defaultDisplayFields)
-  const { displayName, email, password, confirmPassword } = displayFields
+  const [displayFields, setDisplayFields] = useState(defaultDisplayFields);
+  const { displayName, email, password, confirmPassword } = displayFields;
 
   const resetForm = () => {
-    setDisplayFields(defaultDisplayFields)
-  }
+    setDisplayFields(defaultDisplayFields);
+  };
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert('Password and Confirm Password do not match')
+      alert("Password and Confirm Password do not match");
     } else {
       try {
         const { user } = await createUserAuthWithUserEmailAndPassword(
           email,
-          password,
-        )
-        await createUserDocumentFromAuth(user, { displayName })
-        resetForm()
+          password
+        );
+        await createUserDocumentFromAuth(user, {
+          displayName,
+        });
+        resetForm();
       } catch (error) {
-        console.log('failure during user creation', error)
+        console.log("failure during user creation", error);
       }
     }
-  }
+  };
 
   const handleChange = (event) => {
-    const { name, value } = event.target
-    setDisplayFields({ ...displayFields, [name]: value })
-  }
+    const { name, value } = event.target;
+    setDisplayFields({ ...displayFields, [name]: value });
+  };
 
   return (
     <div className="sign-up-container">
@@ -82,7 +84,7 @@ const SignUpForm = () => {
         <CustomButton buttonType="inverted">Sign Up</CustomButton>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default SignUpForm
+export default SignUpForm;
