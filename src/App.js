@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./Routes/home/home.component";
 import NavBar from "./Routes/navigation/navbar.component";
 import Authentication from "./Routes/authentication/authentication.component";
+import Shop from "./Routes/shop/shop.component";
 
 function App() {
   return (
@@ -15,9 +16,5 @@ function App() {
     </Routes>
   );
 }
-
-const Shop = () => {
-  return <div>This is shop component</div>;
-};
 
 export default App;
